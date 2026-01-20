@@ -23,7 +23,7 @@ public class AppManager {
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
     }
 
-    @AfterMethod()
+    @AfterMethod(enabled = false)
     public void tearDown()
     {
         if (driver != null)

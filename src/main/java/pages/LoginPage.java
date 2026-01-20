@@ -1,5 +1,6 @@
 package pages;
 
+import dto.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,26 +24,38 @@ public class LoginPage extends BasePage{
     WebElement btnYalla;
     @FindBy(xpath = "//button[text()='Ok']")
     WebElement btnOk;
+    @FindBy(xpath = "//h2[text()='Logged in success']")
+    WebElement popUpSuccessfulLogin;
 
-    public void fieldEmail()
-    {
-        inputEmail.sendKeys("alex1khalif999@gmail.com");
-    }
+//    public void fieldEmail()
+//    {
+//        inputEmail.sendKeys("alex1khalif999@gmail.com");
+//    }
+//
+//    public void fieldPassword()
+//    {
+//        inputPassword.sendKeys("Qwerty12345!");
+//        pause(2);
+//    }
 
-    public void fieldPassword()
+    public void typeLoginForm(User user)
     {
-        inputPassword.sendKeys("Qwerty12345!");
-        pause(2);
+        inputEmail.sendKeys(user.getEmail());
+        inputPassword.sendKeys(user.getPassword());
     }
 
     public void clickBtnYalla()
     {
         btnYalla.click();
-        pause(2);
     }
 
     public void clickBtnOk()
     {
         btnOk.click();
+    }
+
+    public boolean isLoggedInDisplayed()
+    {
+        return isElementDisplayed(popUpSuccessfulLogin);
     }
 }
