@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -78,5 +79,14 @@ public class SignUpPage extends BasePage{
     public void clickBtnInPopUpRegistered()
     {
         btnOkInPopUpRegistered.click();
+    }
+
+    public void clickCheckBoxWithActions(){
+        int y = checkBoxAgree.getSize().getHeight();
+        int x = checkBoxAgree.getSize().getWidth();
+        System.out.println(x + "x" + y);
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(checkBoxAgree, 5, 10).click().perform();
     }
 }

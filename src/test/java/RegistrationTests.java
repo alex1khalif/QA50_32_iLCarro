@@ -16,10 +16,13 @@ public class RegistrationTests extends AppManager {
         signUpPage.typeLastName();
         signUpPage.typeEmail();
         signUpPage.typePassword();
-        signUpPage.setCheckBoxAgree(true);
+        //signUpPage.setCheckBoxAgree(true);
+        signUpPage.clickCheckBoxWithActions();
         signUpPage.clickBtnYallaInRegForm();
         signUpPage.isRegisteredDisplayed();
         signUpPage.clickBtnInPopUpRegistered();
 
     }
+
+
 }
