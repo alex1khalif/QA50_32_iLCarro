@@ -3,6 +3,7 @@ import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.PopUpPage;
 import pages.RegistrationPage;
@@ -12,6 +13,7 @@ import static utils.UserFactory.*;
 
 public class RegistrationTests extends AppManager {
     RegistrationPage registrationPage;
+    SoftAssert softAssert = new SoftAssert();
 
     @BeforeMethod
     public void goToRegistrationPage() {
@@ -43,5 +45,36 @@ public class RegistrationTests extends AppManager {
         registrationPage.clickBtnYalla();
         Assert.assertTrue(new PopUpPage(getDriver())
                 .isTextInPopUpMessagePresent("You are logged in success"));
+
+    }
+
+    @Test
+    public void registrationNegativeTestInvalidPassword_WithFaker(){
+        User user = positiveUser();
+        user.setPassword("Qwerty474849");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxWithActions();
+        softAssert.assertTrue(registrationPage.
+                isTextInErrorPresent("Password must contain 1 uppercase letter," +
+                        " 1 lowercase letter, 1 number and one special symbol of [@$#^&*!]"), "Password is invalid");
+        System.out.println("Wrong Password");
+        registrationPage.clickBtnYalla();
+        softAssert.assertAll();
+
+    }
+
+    @Test
+    public void registrationNegativeTestWithSpaceInFN_WithFaker(){
+        User user = positiveUser();
+        user.setFirstName(" ");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxWithActions();
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("{\"firstName\":\"не должно быть пустым\"}"),
+                "FirstName is empty");
+
+
+
+
     }
 }
