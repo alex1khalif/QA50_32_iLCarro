@@ -74,7 +74,35 @@ public class RegistrationTests extends AppManager {
                 "FirstName is empty");
 
 
+    }
 
+    @Test
+    public void registrationNegativeTest_UserAlreadyExist(){
+        User user = User.builder()
+                .firstName("Alexander").lastName("Khalifa").email("alex1khalif@gmail.com")
+                .password("Qwerty474849!").build();
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxWithActions();
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("User already exists"));
+    }
 
+    @Test
+    public void registrationNegativeTest_WithEmptyFields(){
+        User user = User.builder()
+                .firstName("").lastName("").email("")
+                .password("").build();
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxWithActions();
+        registrationPage.clickBtnYalla();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Name is required"),
+                "validate error message Name is required");
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Last name is required"),
+                "validate error message LastName is required");
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Email is required"),
+                "validate error message Email is required");
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password is required"),
+                "validate error message Password is required");
+        softAssert.assertAll();
     }
 }
