@@ -1,5 +1,6 @@
 import dto.User;
 import manager.AppManager;
+import net.datafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -70,7 +71,7 @@ public class RegistrationTests extends AppManager {
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxWithActions();
         registrationPage.clickBtnYalla();
-        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("{\"firstName\":\"не должно быть пустым\"}"),
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("{\"firstName\":\"must not be blank\"}"),
                 "FirstName is empty");
 
 
@@ -104,5 +105,16 @@ public class RegistrationTests extends AppManager {
         softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password is required"),
                 "validate error message Password is required");
         softAssert.assertAll();
+    }
+
+    @Test
+    public void regNegTestWithOnlySpaceInFNandLN(){
+        User user = User.builder().lastName(" ").firstName(" ").email("alex1khalif777@gmail.com")
+                .password("Qwerty474849!").build();
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxWithActions();
+        registrationPage.clickBtnYalla();
+        Assert.assertTrue(new PopUpPage(getDriver()).
+                isTextInPopUpMessagePresent("{\"firstName\":\"must not be blank\",\"lastName\":\"must not be blank\"}"));
     }
 }

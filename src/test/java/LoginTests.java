@@ -89,12 +89,28 @@ public class LoginTests extends AppManager {
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "validate field password");
         System.out.println("right text!!");
         softAssert.assertAll();
+    }
 
+    @Test
+    public void loginNegativeTest_EmailWithRusLanguage(){
+        User user = User.builder().email("alex1khalif@gmail.ком").password("Qwerty474849!").build();
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
+    }
 
-
-
-
-
+    @Test
+    public void loginNegativeTest_WithSpaceInPassword(){
+        User user = User.builder().email("alex1khalif@gmail.com").password(" ").build();
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
     }
 
 }
