@@ -58,4 +58,9 @@ public class LoginPage extends BasePage{
     {
         return isElementDisplayed(popUpSuccessfulLogin);
     }
+
+    public void typeLoginFormProperties(String email, String password) {
+        inputEmail.sendKeys(email);
+        inputPassword.sendKeys(password);
+    }
 }

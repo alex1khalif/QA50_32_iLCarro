@@ -6,6 +6,7 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpPage;
+import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
 
@@ -111,6 +112,16 @@ public class LoginTests extends AppManager {
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
+    }
+
+    @Test
+    public void loginPositiveTestWithProperties(){
+        HomePage homePage = new HomePage(getDriver());
+        homePage.clickBtnLogin();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.typeLoginFormProperties(getProperty("base.properties", "login"),
+                getProperty("base.properties", "password"));
+        loginPage.clickBtnYalla();
     }
 
 }
