@@ -6,6 +6,8 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpPage;
+import utils.RetryAnalyzer;
+
 import static utils.PropertiesReader.*;
 
 public class LoginTests extends AppManager {
@@ -30,8 +32,8 @@ public class LoginTests extends AppManager {
     public void loginPositiveTest()
     {
         User user = User.builder()
-                .email("alex1khalif999@gmail.com")
-                .password("Qwerty12345!")
+                .email(getProperty("base.properties", "login"))
+                .password(getProperty("base.properties", "password"))
                 .build();
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLogin();
@@ -114,7 +116,7 @@ public class LoginTests extends AppManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void loginPositiveTestWithProperties(){
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLogin();
