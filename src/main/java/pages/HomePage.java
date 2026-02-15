@@ -21,6 +21,20 @@ public class HomePage extends BasePage {
     WebElement btnLogin;
     @FindBy(xpath = "//a[text()=' Sign up ']")
     WebElement btnSignUp;
+    @FindBy(xpath = "//input[@id='city']")
+    WebElement inputCity;
+    @FindBy(xpath = "//input[@id='dates']")
+    WebElement inputDates;
+    @FindBy(xpath = "//button[@type='submit']")
+    WebElement btnYallaFindCar;
+    @FindBy(xpath = "//button[@aria-label='Next month']")
+    WebElement btnNextMonth;
+    @FindBy(xpath = "//button[@aria-label='Previous month']")
+    WebElement btnPreviousMonth;
+    @FindBy(xpath = "//button[@aria-label='Choose month and year']")
+    WebElement btnMonthAndYear;
+    @FindBy(xpath = "//sat-calendar[@id='sat-datepicker-0']]")
+    WebElement bodyOfCalendar;
 
     public void clickBtnLogin()
     {
