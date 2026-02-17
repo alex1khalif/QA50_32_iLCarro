@@ -1,11 +1,15 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import utils.PropertiesReader;
+
+import java.time.LocalDate;
 
 public class HomePage extends BasePage {
 
@@ -32,7 +36,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[@aria-label='Previous month']")
     WebElement btnPreviousMonth;
     @FindBy(xpath = "//button[@aria-label='Choose month and year']")
-    WebElement btnMonthAndYear;
+    WebElement btnYearCalendar;
     @FindBy(xpath = "//sat-calendar[@id='sat-datepicker-0']]")
     WebElement bodyOfCalendar;
 
@@ -46,4 +50,44 @@ public class HomePage extends BasePage {
         btnSignUp.click();
     }
 
+    public void typeSearchForm(String city, LocalDate startDate, LocalDate endDate) {
+
+        inputCity.sendKeys(city);
+        String dates = startDate.getMonthValue() + "/" + startDate.getDayOfMonth() + "/" + startDate.getYear() + " - " +
+                endDate.getMonthValue() + "/" + endDate.getDayOfMonth() + "/" + endDate.getYear();
+        inputDates.sendKeys(dates);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.querySelector(\"button[type='submit']\").removeAttribute(\"disabled\")");
+        //btnYallaFindCar.click();
+
+    }
+
+    public void clickBtnYalla(){
+        clickWait(btnYallaFindCar, 3);
+    }
+
+    public void typeSearchFormWOJS(String city, LocalDate startDate, LocalDate endDate) {
+
+        inputCity.sendKeys(city);
+        String dates = startDate.getMonthValue() + "/" + startDate.getDayOfMonth() + "/" + startDate.getYear() + " - " +
+                endDate.getMonthValue() + "/" + endDate.getDayOfMonth() + "/" + endDate.getYear();
+        inputDates.sendKeys(dates);
+
+    }
+
+    private void typeCalendar(LocalDate date){
+        btnYearCalendar.click();
+        //td[@aria-label='2026']
+        String year = Integer.toString(date.getYear());
+        WebElement btnYear = driver.findElement(By.xpath("//td[@aria-label='"+ year +"']"));
+        btnYear.click();
+    }
+
+    public void typeSearchFormWithCalendar(String city, LocalDate startDate, LocalDate endDate){
+        inputCity.sendKeys(city);
+        inputDates.click();
+        typeCalendar(startDate);
+
+
+    }
 }
