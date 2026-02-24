@@ -1,11 +1,14 @@
 import manager.AppManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.HomePage;
+import utils.TestNGListener;
 
 import java.time.LocalDate;
+@Listeners(TestNGListener.class)
 
 public class SearchCarTests extends AppManager {
 
@@ -42,7 +45,7 @@ public class SearchCarTests extends AppManager {
         LocalDate startDate = LocalDate.of(2026, 3, 12);
         LocalDate endDate = LocalDate.of(2026, 3, 22);
         homePage.typeSearchFormWOJS(city, startDate, endDate);
-        Assert.assertTrue(homePage.isTextInErrorPresent("City is required"));
+        softAssert.assertTrue(homePage.isTextInErrorPresent("City is required"));
     }
 
     @Test
@@ -51,8 +54,8 @@ public class SearchCarTests extends AppManager {
         LocalDate startDate = LocalDate.of(2026, 3, 12);
         LocalDate endDate = LocalDate.of(2026, 3, 22);
         homePage.typeSearchFormWithCalendar(city, startDate, endDate);
-       // homePage.clickBtnYalla();
-       // Assert.assertTrue(homePage.urlContains("results", 5));
+        homePage.clickBtnYalla();
+        Assert.assertTrue(homePage.urlContains("results", 5));
 
 
     }
@@ -74,9 +77,9 @@ public class SearchCarTests extends AppManager {
         LocalDate startDate = LocalDate.of(2026, 3, 12);
         LocalDate endDate = LocalDate.of(2025, 3, 22);
         homePage.typeSearchForm(city, startDate, endDate);
-        Assert.assertTrue(homePage.isTextInErrorPresent("City is required"));
+        softAssert.assertTrue(homePage.isTextInErrorPresent("City is required"), "validate message - City is required");
         homePage.clickBtnYalla();
-        Assert.assertTrue(homePage.isTextInErrorPresent("Second date must be after first date"));
+        softAssert.assertTrue(homePage.isTextInErrorPresent("Second date must be after first date"), "validate message - Second date must be after first date");
     }
 
     @Test
