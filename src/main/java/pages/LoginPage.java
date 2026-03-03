@@ -26,6 +26,8 @@ public class LoginPage extends BasePage{
     WebElement btnOk;
     @FindBy(xpath = "//h2[text()='Logged in success']")
     WebElement popUpSuccessfulLogin;
+    @FindBy(xpath = "//a[@id='1']")
+    WebElement clickBtnLetTheCarWorkPage;
 
 //    public void fieldEmail()
 //    {
@@ -37,6 +39,10 @@ public class LoginPage extends BasePage{
 //        inputPassword.sendKeys("Qwerty12345!");
 //        pause(2);
 //    }
+
+    public void clickBtnLetTheCarWorkPage(){
+        clickBtnLetTheCarWorkPage.click();
+    }
 
     public void typeLoginForm(User user)
     {
