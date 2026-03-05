@@ -4,12 +4,17 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+import pages.RegistrationPage;
 import utils.enums.FooterMenuItem;
 import utils.enums.HeaderMenuItem;
 
 import static utils.PropertiesReader.getProperty;
+import static utils.UserFactory.positiveUser;
 
 public class NavigationTests extends AppManager {
+    RegistrationPage registrationPage;
+    LoginPage loginPage;
+    HomePage homePage;
 
     @Test
     public void iconFacebookNavigationTest(){
@@ -83,6 +88,23 @@ public class NavigationTests extends AppManager {
         homePage.pause(2);
         homePage.clickButtonHeader(HeaderMenuItem.LOGOUT);
         Assert.assertTrue(getDriver().getCurrentUrl().contains("search"));
+
+    }
+
+    @Test
+    public void deleteAccountNavigationTest(){
+        User user = positiveUser();
+        new HomePage(getDriver()).clickBtnSignUp();
+        registrationPage = new RegistrationPage(getDriver());
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxWithActions();
+        registrationPage.clickBtnYalla();
+        registrationPage.clickBtnOkInRegPage();
+        registrationPage.pause(2);
+        registrationPage.clickButtonHeader(HeaderMenuItem.DELETE_ACCOUNT);
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("search"));
+
+
 
     }
 }

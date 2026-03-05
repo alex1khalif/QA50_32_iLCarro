@@ -44,6 +44,8 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//sat-calendar[@id='sat-datepicker-0']]")
     WebElement bodyOfCalendar;
 
+
+
     public void clickBtnLogin()
     {
         btnLogin.click();
