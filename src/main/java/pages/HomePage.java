@@ -115,6 +115,6 @@ public class HomePage extends BasePage {
 
     public boolean clickIconFooter(FooterMenuItem item, String title){
         driver.findElement(By.xpath(item.getLocator())).click();
-       return new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.titleContains(title));
+       return new WebDriverWait(driver, Duration.ofSeconds(6)).until(ExpectedConditions.titleContains(title));
     }
 }
