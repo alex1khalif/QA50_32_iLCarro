@@ -30,7 +30,7 @@ public class LoginTests extends AppManager {
 //
 //    }
 
-    @Test
+    @Test(groups = "smoke")
     public void loginPositiveTest(Method method)
     {
         User user = User.builder()
@@ -46,7 +46,7 @@ public class LoginTests extends AppManager {
         Assert.assertTrue(loginPage.isLoggedInDisplayed());
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void loginPositiveTest_WithPopUpPage()
     {
         User user = User.builder()

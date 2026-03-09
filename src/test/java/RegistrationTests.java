@@ -16,13 +16,13 @@ public class RegistrationTests extends AppManager {
     RegistrationPage registrationPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage() {
         new HomePage(getDriver()).clickBtnSignUp();
         registrationPage = new RegistrationPage(getDriver());
     }
 
-    @Test
+    @Test()
     public void registrationPositiveTest() {
         int i = new Random().nextInt(1000);
         User user = User.builder()
@@ -38,7 +38,7 @@ public class RegistrationTests extends AppManager {
                 .isTextInPopUpMessagePresent("You are logged in success"));
     }
 
-    @Test
+    @Test()
     public void registrationPositiveTest_WithFaker() {
         User user = positiveUser();
         registrationPage.typeRegistrationForm(user);

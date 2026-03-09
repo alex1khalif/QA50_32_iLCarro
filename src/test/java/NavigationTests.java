@@ -16,28 +16,28 @@ public class NavigationTests extends AppManager {
     LoginPage loginPage;
     HomePage homePage;
 
-    @Test
+    @Test(groups = "navigation")
     public void iconFacebookNavigationTest(){
         Assert.assertTrue(new HomePage(getDriver()).clickIconFooter(FooterMenuItem.ICON_FACEBOOK, "Facebook"));
     }
 
-   @Test
+   @Test(groups = "navigation")
     public void iconTelegramNavigationTest(){
         Assert.assertTrue(new HomePage(getDriver())
                 .clickIconFooter(FooterMenuItem.ICON_TELEGRAM, "Telegram Messenger"));
    }
 
-   @Test
+   @Test(groups = "navigation")
     public void iconVKNavigationTest(){
         Assert.assertTrue(new HomePage(getDriver()).clickIconFooter(FooterMenuItem.ICON_VK, "VK | Welcome!"));
    }
 
-   @Test
+   @Test(groups = "navigation")
     public void iconInstagramNavigationTest(){
         Assert.assertTrue(new HomePage(getDriver()).clickIconFooter(FooterMenuItem.ICON_INSTAGRAM, "Instagram"));
    }
 
-   @Test
+   @Test(groups = "navigation")
     public void iconSlackNavigationTest(){
         Assert.assertTrue(new HomePage(getDriver())
                 .clickIconFooter(FooterMenuItem.ICON_SLACK, "Slack | AI Work Platform"));

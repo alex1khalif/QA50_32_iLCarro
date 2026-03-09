@@ -14,12 +14,12 @@ public class SearchCarTests extends AppManager {
 
     SoftAssert softAssert = new SoftAssert();
     HomePage homePage;
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void openHomePage(){
         homePage = new HomePage(getDriver());
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void searchCarPositiveTest(){
         String city = "Rehovot";
         LocalDate startDate = LocalDate.of(2026, 3, 12);
@@ -48,7 +48,7 @@ public class SearchCarTests extends AppManager {
         softAssert.assertTrue(homePage.isTextInErrorPresent("City is required"));
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void searchCarPositiveTestWithCalendar(){
         String city = "Rehovot";
         LocalDate startDate = LocalDate.of(2026, 3, 12);
