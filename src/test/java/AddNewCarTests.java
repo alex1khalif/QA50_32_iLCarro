@@ -35,7 +35,7 @@ public class AddNewCarTests extends AppManager {
         letTheCarWorkPage = homePage.clickButtonHeader(HeaderMenuItem.LET_THE_CAR_WORK);
     }
 
-    @Test()
+    @Test(groups = "smoke")
     public void addNewCarPositiveTest(){
         Car car = CarFactory.positiveCar();
         letTheCarWorkPage.typeAddNewCarForm(car);

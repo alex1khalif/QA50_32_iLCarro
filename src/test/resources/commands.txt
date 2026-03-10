@@ -1,0 +1,7 @@
+./gradlew clean smoketests
+./gradlew clean smoke_contact_tests
+./gradlew clean negativetests
+./gradlew clean different_tests -Dsuite=smoke_contact_tests
+
+/Users/alexkhalifa/AutoProjects/QA_50_32_PhoneBook_Web_Api
+

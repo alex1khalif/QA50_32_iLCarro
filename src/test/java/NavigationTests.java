@@ -16,7 +16,7 @@ public class NavigationTests extends AppManager {
     LoginPage loginPage;
     HomePage homePage;
 
-    @Test(groups = "navigation")
+    @Test(groups = "smoke")
     public void iconFacebookNavigationTest(){
         Assert.assertTrue(new HomePage(getDriver()).clickIconFooter(FooterMenuItem.ICON_FACEBOOK, "Facebook"));
     }

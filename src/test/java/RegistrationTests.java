@@ -38,7 +38,7 @@ public class RegistrationTests extends AppManager {
                 .isTextInPopUpMessagePresent("You are logged in success"));
     }
 
-    @Test()
+    @Test(groups = "smoke")
     public void registrationPositiveTest_WithFaker() {
         User user = positiveUser();
         registrationPage.typeRegistrationForm(user);

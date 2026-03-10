@@ -46,7 +46,7 @@ public class LoginTests extends AppManager {
         Assert.assertTrue(loginPage.isLoggedInDisplayed());
     }
 
-    @Test(groups = "smoke")
+    @Test()
     public void loginPositiveTest_WithPopUpPage()
     {
         User user = User.builder()
